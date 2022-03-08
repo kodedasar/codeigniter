@@ -18,6 +18,7 @@
 	},
 	"scripts": {
 		"test": [
+			"@putenv XDEBUG_MODE=coverage",
 			"vendor/bin/phpunit -c application/tests/"
 		]
 	},
