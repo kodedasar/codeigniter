@@ -391,6 +391,5 @@ abstract class CI_DB_utility
         } elseif ($prefs['format'] === 'gzip') { // Was a Gzip file requested?
             return gzencode($this->_backup($prefs));
         }
-
     }
 }
