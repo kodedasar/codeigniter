@@ -80,11 +80,11 @@ if (!function_exists('smiley_js')) {
 
             if (is_array($alias)) {
                 foreach ($alias as $name => $id) {
-                    $m[] = '"' . $name . '" : "' . $id . '"';
+                    $m[] = '"'.$name.'" : "'.$id.'"';
                 }
             }
 
-            $m = '{' . implode(',', $m) . '}';
+            $m = '{'.implode(',', $m).'}';
 
             $r .= <<<EOF
 			var smiley_map = {$m};
@@ -117,12 +117,12 @@ if (!function_exists('smiley_js')) {
 EOF;
         } elseif (is_array($alias)) {
             foreach ($alias as $name => $id) {
-                $r .= 'smiley_map["' . $name . '"] = "' . $id . "\";\n";
+                $r .= 'smiley_map["'.$name.'"] = "'.$id."\";\n";
             }
         }
 
         return ($inline)
-            ? '<script type="text/javascript" charset="utf-8">/*<![CDATA[ */' . $r . '// ]]></script>'
+            ? '<script type="text/javascript" charset="utf-8">/*<![CDATA[ */'.$r.'// ]]></script>'
             : $r;
     }
 }
@@ -151,7 +151,7 @@ if (!function_exists('get_clickable_smileys')) {
         }
 
         // Add a trailing slash to the file path if needed
-        $image_url = rtrim($image_url, '/') . '/';
+        $image_url = rtrim($image_url, '/').'/';
 
         $used = [];
         foreach ($smileys as $key => $val) {
@@ -163,7 +163,7 @@ if (!function_exists('get_clickable_smileys')) {
                 continue;
             }
 
-            $link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\'' . $key . '\', \'' . $alias . '\')"><img src="' . $image_url . $smileys[$key][0] . '" alt="' . $smileys[$key][3] . '" style="width: ' . $smileys[$key][1] . '; height: ' . $smileys[$key][2] . '; border: 0;" /></a>';
+            $link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\''.$key.'\', \''.$alias.'\')"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
             $used[$smileys[$key][0]] = true;
         }
 
@@ -192,10 +192,10 @@ if (!function_exists('parse_smileys')) {
         }
 
         // Add a trailing slash to the file path if needed
-        $image_url = rtrim($image_url, '/') . '/';
+        $image_url = rtrim($image_url, '/').'/';
 
         foreach ($smileys as $key => $val) {
-            $str = str_replace($key, '<img src="' . $image_url . $smileys[$key][0] . '" alt="' . $smileys[$key][3] . '" style="width: ' . $smileys[$key][1] . '; height: ' . $smileys[$key][2] . '; border: 0;" />', $str);
+            $str = str_replace($key, '<img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" />', $str);
         }
 
         return $str;
@@ -217,12 +217,12 @@ if (!function_exists('_get_smiley_array')) {
         static $_smileys;
 
         if (!is_array($_smileys)) {
-            if (file_exists(APPPATH . 'config/smileys.php')) {
-                include APPPATH . 'config/smileys.php';
+            if (file_exists(APPPATH.'config/smileys.php')) {
+                include APPPATH.'config/smileys.php';
             }
 
-            if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/smileys.php')) {
-                include APPPATH . 'config/' . getenv('CI_ENV') . '/smileys.php';
+            if (file_exists(APPPATH.'config/'.getenv('CI_ENV').'/smileys.php')) {
+                include APPPATH.'config/'.getenv('CI_ENV').'/smileys.php';
             }
 
             if (empty($smileys) or !is_array($smileys)) {

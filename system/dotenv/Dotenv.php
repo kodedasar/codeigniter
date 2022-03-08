@@ -66,7 +66,7 @@ class Dotenv
             $file = '.env';
         }
 
-        $filePath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+        $filePath = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
 
         return $filePath;
     }

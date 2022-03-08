@@ -159,12 +159,12 @@ class CI_Router
         // Load the routes.php file. It would be great if we could
         // skip this for enable_query_strings = TRUE, but then
         // default_controller would be empty ...
-        if (file_exists(APPPATH . 'config/routes.php')) {
-            include APPPATH . 'config/routes.php';
+        if (file_exists(APPPATH.'config/routes.php')) {
+            include APPPATH.'config/routes.php';
         }
 
-        if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/routes.php')) {
-            include APPPATH . 'config/' . getenv('CI_ENV') . '/routes.php';
+        if (file_exists(APPPATH.'config/'.getenv('CI_ENV').'/routes.php')) {
+            include APPPATH.'config/'.getenv('CI_ENV').'/routes.php';
         }
 
         // Validate & get reserved routes
@@ -284,7 +284,7 @@ class CI_Router
             $method = 'index';
         }
 
-        if (!file_exists(APPPATH . 'controllers/' . $this->directory . ucfirst($class) . '.php')) {
+        if (!file_exists(APPPATH.'controllers/'.$this->directory.ucfirst($class).'.php')) {
             // This will trigger 404 later
             return;
         }
@@ -323,12 +323,12 @@ class CI_Router
         // is found or when such a directory doesn't exist
         while ($c-- > 0) {
             $test = $this->directory
-                . ucfirst($this->translate_uri_dashes === true ? str_replace('-', '_', $segments[0]) : $segments[0]);
+                .ucfirst($this->translate_uri_dashes === true ? str_replace('-', '_', $segments[0]) : $segments[0]);
 
             if (
-                !file_exists(APPPATH . 'controllers/' . $test . '.php')
+                !file_exists(APPPATH.'controllers/'.$test.'.php')
                 && $directory_override === false
-                && is_dir(APPPATH . 'controllers/' . $this->directory . $segments[0])
+                && is_dir(APPPATH.'controllers/'.$this->directory.$segments[0])
             ) {
                 $this->set_directory(array_shift($segments), true);
                 continue;
@@ -375,7 +375,7 @@ class CI_Router
             $key = str_replace([':any', ':num'], ['[^/]+', '[0-9]+'], $key);
 
             // Does the RegEx match?
-            if (preg_match('#^' . $key . '$#', $uri, $matches)) {
+            if (preg_match('#^'.$key.'$#', $uri, $matches)) {
                 // Are we using callbacks to process back-references?
                 if (!is_string($val) && is_callable($val)) {
                     // Remove the original string from the matches array.
@@ -386,7 +386,7 @@ class CI_Router
                 }
                 // Are we using the default routing method for back-references?
                 elseif (strpos($val, '$') !== false && strpos($key, '(') !== false) {
-                    $val = preg_replace('#^' . $key . '$#', $val, $uri);
+                    $val = preg_replace('#^'.$key.'$#', $val, $uri);
                 }
 
                 $this->_set_request(explode('/', $val));
@@ -469,9 +469,9 @@ class CI_Router
     public function set_directory($dir, $append = false)
     {
         if ($append !== true or empty($this->directory)) {
-            $this->directory = str_replace('.', '', trim($dir, '/')) . '/';
+            $this->directory = str_replace('.', '', trim($dir, '/')).'/';
         } else {
-            $this->directory .= str_replace('.', '', trim($dir, '/')) . '/';
+            $this->directory .= str_replace('.', '', trim($dir, '/')).'/';
         }
     }
 

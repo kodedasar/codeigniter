@@ -92,13 +92,13 @@ class CI_Config
         if (empty($this->config['base_url'])) {
             if (isset($_SERVER['SERVER_ADDR'])) {
                 if (strpos($_SERVER['SERVER_ADDR'], ':') !== false) {
-                    $server_addr = '[' . $_SERVER['SERVER_ADDR'] . ']';
+                    $server_addr = '['.$_SERVER['SERVER_ADDR'].']';
                 } else {
                     $server_addr = $_SERVER['SERVER_ADDR'];
                 }
 
-                $base_url = (is_https() ? 'https' : 'http') . '://' . $server_addr
-                    . substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+                $base_url = (is_https() ? 'https' : 'http').'://'.$server_addr
+                    .substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
             } else {
                 $base_url = 'http://localhost/';
             }
@@ -126,8 +126,8 @@ class CI_Config
         $loaded = false;
 
         foreach ($this->_config_paths as $path) {
-            foreach ([$file, getenv('CI_ENV') . DIRECTORY_SEPARATOR . $file] as $location) {
-                $file_path = $path . 'config/' . $location . '.php';
+            foreach ([$file, getenv('CI_ENV').DIRECTORY_SEPARATOR.$file] as $location) {
+                $file_path = $path.'config/'.$location.'.php';
                 if (in_array($file_path, $this->is_loaded, true)) {
                     return true;
                 }
@@ -143,7 +143,7 @@ class CI_Config
                         return false;
                     }
 
-                    show_error('Your ' . $file_path . ' file does not appear to contain a valid configuration array.');
+                    show_error('Your '.$file_path.' file does not appear to contain a valid configuration array.');
                 }
 
                 if ($use_sections === true) {
@@ -157,7 +157,7 @@ class CI_Config
                 $this->is_loaded[] = $file_path;
                 $config = null;
                 $loaded = true;
-                log_message('debug', 'Config file loaded: ' . $file_path);
+                log_message('debug', 'Config file loaded: '.$file_path);
             }
         }
 
@@ -167,7 +167,7 @@ class CI_Config
             return false;
         }
 
-        show_error('The configuration file ' . $file . '.php does not exist.');
+        show_error('The configuration file '.$file.'.php does not exist.');
     }
 
     // --------------------------------------------------------------------
@@ -206,7 +206,7 @@ class CI_Config
             return '';
         }
 
-        return rtrim($this->config[$item], '/') . '/';
+        return rtrim($this->config[$item], '/').'/';
     }
 
     // --------------------------------------------------------------------
@@ -232,12 +232,12 @@ class CI_Config
             if ($protocol === '') {
                 $base_url = substr($base_url, strpos($base_url, '//'));
             } else {
-                $base_url = $protocol . substr($base_url, strpos($base_url, '://'));
+                $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
             }
         }
 
         if (empty($uri)) {
-            return $base_url . $this->item('index_page');
+            return $base_url.$this->item('index_page');
         }
 
         $uri = $this->_uri_string($uri);
@@ -247,18 +247,18 @@ class CI_Config
 
             if ($suffix !== '') {
                 if (($offset = strpos($uri, '?')) !== false) {
-                    $uri = substr($uri, 0, $offset) . $suffix . substr($uri, $offset);
+                    $uri = substr($uri, 0, $offset).$suffix.substr($uri, $offset);
                 } else {
                     $uri .= $suffix;
                 }
             }
 
-            return $base_url . $this->slash_item('index_page') . $uri;
+            return $base_url.$this->slash_item('index_page').$uri;
         } elseif (strpos($uri, '?') === false) {
-            $uri = '?' . $uri;
+            $uri = '?'.$uri;
         }
 
-        return $base_url . $this->item('index_page') . $uri;
+        return $base_url.$this->item('index_page').$uri;
     }
 
     // -------------------------------------------------------------
@@ -284,11 +284,11 @@ class CI_Config
             if ($protocol === '') {
                 $base_url = substr($base_url, strpos($base_url, '//'));
             } else {
-                $base_url = $protocol . substr($base_url, strpos($base_url, '://'));
+                $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
             }
         }
 
-        return $base_url . $this->_uri_string($uri);
+        return $base_url.$this->_uri_string($uri);
     }
 
     // -------------------------------------------------------------
@@ -329,7 +329,7 @@ class CI_Config
     {
         $x = explode('/', preg_replace('|/*(.+?)/*$|', '\\1', BASEPATH));
 
-        return $this->slash_item('base_url') . end($x) . '/';
+        return $this->slash_item('base_url').end($x).'/';
     }
 
     // --------------------------------------------------------------------

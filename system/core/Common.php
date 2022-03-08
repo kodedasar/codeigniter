@@ -101,7 +101,7 @@ if (!function_exists('is_really_writable')) {
          * write a file then read it. Bah...
          */
         if (is_dir($file)) {
-            $file = rtrim($file, '/') . '/' . md5(mt_rand());
+            $file = rtrim($file, '/').'/'.md5(mt_rand());
             if (($fp = @fopen($file, 'ab')) === false) {
                 return false;
             }
@@ -151,11 +151,11 @@ if (!function_exists('load_class')) {
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
         foreach ([APPPATH, BASEPATH] as $path) {
-            if (file_exists($path . $directory . '/' . $class . '.php')) {
-                $name = 'CI_' . $class;
+            if (file_exists($path.$directory.'/'.$class.'.php')) {
+                $name = 'CI_'.$class;
 
                 if (class_exists($name, false) === false) {
-                    require_once $path . $directory . '/' . $class . '.php';
+                    require_once $path.$directory.'/'.$class.'.php';
                 }
 
                 break;
@@ -163,11 +163,11 @@ if (!function_exists('load_class')) {
         }
 
         // Is the request a class extension? If so we load it too
-        if (file_exists(APPPATH . $directory . '/' . config_item('subclass_prefix') . $class . '.php')) {
-            $name = config_item('subclass_prefix') . $class;
+        if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php')) {
+            $name = config_item('subclass_prefix').$class;
 
             if (class_exists($name, false) === false) {
-                require_once APPPATH . $directory . '/' . $name . '.php';
+                require_once APPPATH.$directory.'/'.$name.'.php';
             }
         }
 
@@ -176,7 +176,7 @@ if (!function_exists('load_class')) {
             // Note: We use exit() rather than show_error() in order to avoid a
             // self-referencing loop with the Exceptions class
             set_status_header(503);
-            echo 'Unable to locate the specified class: ' . $class . '.php';
+            echo 'Unable to locate the specified class: '.$class.'.php';
             exit(5); // EXIT_UNK_CLASS
         }
 
@@ -232,7 +232,7 @@ if (!function_exists('get_config')) {
         static $config;
 
         if (empty($config)) {
-            $file_path = APPPATH . 'config/config.php';
+            $file_path = APPPATH.'config/config.php';
             $found = false;
             if (file_exists($file_path)) {
                 $found = true;
@@ -240,7 +240,7 @@ if (!function_exists('get_config')) {
             }
 
             // Is the config file in the environment folder?
-            if (file_exists($file_path = APPPATH . 'config/' . getenv('CI_ENV') . '/config.php')) {
+            if (file_exists($file_path = APPPATH.'config/'.getenv('CI_ENV').'/config.php')) {
                 require $file_path;
             } elseif (!$found) {
                 set_status_header(503);
@@ -301,12 +301,12 @@ if (!function_exists('get_mimes')) {
         static $_mimes;
 
         if (empty($_mimes)) {
-            $_mimes = file_exists(APPPATH . 'config/mimes.php')
-                ? include(APPPATH . 'config/mimes.php')
+            $_mimes = file_exists(APPPATH.'config/mimes.php')
+                ? include(APPPATH.'config/mimes.php')
                 : [];
 
-            if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/mimes.php')) {
-                $_mimes = array_merge($_mimes, include(APPPATH . 'config/' . getenv('CI_ENV') . '/mimes.php'));
+            if (file_exists(APPPATH.'config/'.getenv('CI_ENV').'/mimes.php')) {
+                $_mimes = array_merge($_mimes, include(APPPATH.'config/'.getenv('CI_ENV').'/mimes.php'));
             }
         }
 
@@ -524,14 +524,14 @@ if (!function_exists('set_status_header')) {
         }
 
         if (strpos(PHP_SAPI, 'cgi') === 0) {
-            header('Status: ' . $code . ' ' . $text, true);
+            header('Status: '.$code.' '.$text, true);
 
             return;
         }
 
         $server_protocol = (isset($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], ['HTTP/1.0', 'HTTP/1.1', 'HTTP/2', 'HTTP/2.0'], true))
             ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
-        header($server_protocol . ' ' . $code . ' ' . $text, true, $code);
+        header($server_protocol.' '.$code.' '.$text, true, $code);
     }
 }
 
@@ -610,7 +610,7 @@ if (!function_exists('_exception_handler')) {
     function _exception_handler($exception)
     {
         $_error = &load_class('Exceptions', 'core');
-        $_error->log_exception('error', 'Exception: ' . $exception->getMessage(), $exception->getFile(), $exception->getLine());
+        $_error->log_exception('error', 'Exception: '.$exception->getMessage(), $exception->getFile(), $exception->getLine());
 
         is_cli() or set_status_header(500);
         // Should we display the error?
@@ -737,14 +737,14 @@ if (!function_exists('_stringify_attributes')) {
         }
 
         if (is_string($attributes)) {
-            return ' ' . $attributes;
+            return ' '.$attributes;
         }
 
         $attributes = (array) $attributes;
 
         $atts = '';
         foreach ($attributes as $key => $val) {
-            $atts .= ($js) ? $key . '=' . $val . ',' : ' ' . $key . '="' . $val . '"';
+            $atts .= ($js) ? $key.'='.$val.',' : ' '.$key.'="'.$val.'"';
         }
 
         return rtrim($atts, ',');
