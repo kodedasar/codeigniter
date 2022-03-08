@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter
+ * CodeIgniter.
  *
  * An open source application development framework for PHP
  *
@@ -26,35 +26,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2022, CodeIgniter Foundation (https://codeigniter.com/)
  * @license	https://opensource.org/licenses/MIT	MIT License
+ *
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * CI_Session_driver_interface
+ * CI_Session_driver_interface.
  *
  * A compatibility typeless SessionHandlerInterface alias
  *
- * @package	CodeIgniter
- * @subpackage	Libraries
  * @category	Sessions
+ *
  * @author	Andrey Andreev
+ *
  * @link	https://codeigniter.com/userguide3/libraries/sessions.html
  */
-interface CI_Session_driver_interface {
+interface CI_Session_driver_interface
+{
+    public function open($save_path, $name);
 
-	public function open($save_path, $name);
-	public function close();
-	public function read($session_id);
-	public function write($session_id, $session_data);
-	public function destroy($session_id);
-	public function gc($maxlifetime);
-	public function updateTimestamp($session_id, $data);
-	public function validateId($session_id);
+    public function close();
+
+    public function read($session_id);
+
+    public function write($session_id, $session_data);
+
+    public function destroy($session_id);
+
+    public function gc($maxlifetime);
+
+    public function updateTimestamp($session_id, $data);
+
+    public function validateId($session_id);
 }

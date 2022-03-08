@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter
+ * CodeIgniter.
  *
  * An open source application development framework for PHP
  *
@@ -26,73 +26,73 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2022, CodeIgniter Foundation (https://codeigniter.com/)
  * @license	https://opensource.org/licenses/MIT	MIT License
+ *
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * OldSessionWrapper
+ * OldSessionWrapper.
  *
  * PHP 8 Session handler compatibility wrapper, pre-PHP8 version
  *
- * @package	CodeIgniter
- * @subpackage	Libraries
  * @category	Sessions
+ *
  * @author	Andrey Andreev
+ *
  * @link	https://codeigniter.com/userguide3/libraries/sessions.html
  */
-class CI_SessionWrapper implements SessionHandlerInterface, SessionUpdateTimestampHandlerInterface {
+class CI_SessionWrapper implements SessionHandlerInterface, SessionUpdateTimestampHandlerInterface
+{
+    protected $driver;
 
-	protected $driver;
+    public function __construct(CI_Session_driver_interface $driver)
+    {
+        $this->driver = $driver;
+    }
 
-	public function __construct(CI_Session_driver_interface $driver)
-	{
-		$this->driver = $driver;
-	}
+    public function open($save_path, $name)
+    {
+        return $this->driver->open($save_path, $name);
+    }
 
-	public function open($save_path, $name)
-	{
-		return $this->driver->open($save_path, $name);
-	}
+    public function close()
+    {
+        return $this->driver->close();
+    }
 
-	public function close()
-	{
-		return $this->driver->close();
-	}
+    public function read($id)
+    {
+        return $this->driver->read($id);
+    }
 
-	public function read($id)
-	{
-		return $this->driver->read($id);
-	}
+    public function write($id, $data)
+    {
+        return $this->driver->write($id, $data);
+    }
 
-	public function write($id, $data)
-	{
-		return $this->driver->write($id, $data);
-	}
+    public function destroy($id)
+    {
+        return $this->driver->destroy($id);
+    }
 
-	public function destroy($id)
-	{
-		return $this->driver->destroy($id);
-	}
+    public function gc($maxlifetime)
+    {
+        return $this->driver->gc($maxlifetime);
+    }
 
-	public function gc($maxlifetime)
-	{
-		return $this->driver->gc($maxlifetime);
-	}
+    public function updateTimestamp($id, $data)
+    {
+        return $this->driver->updateTimestamp($id, $data);
+    }
 
-	public function updateTimestamp($id, $data)
-	{
-		return $this->driver->updateTimestamp($id, $data);
-	}
-
-	public function validateId($id)
-	{
-		return $this->driver->validateId($id);
-	}
+    public function validateId($id)
+    {
+        return $this->driver->validateId($id);
+    }
 }
