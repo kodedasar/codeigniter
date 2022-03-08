@@ -53,7 +53,7 @@ class Validator
     {
         return $this->assertCallback(
             function ($value) {
-                return (strlen(trim($value)) > 0);
+                return strlen(trim($value)) > 0;
             },
             'is empty'
         );
@@ -90,7 +90,7 @@ class Validator
             throw new \InvalidArgumentException('Callback must be callable');
         }
 
-        $variablesFailingAssertion = array();
+        $variablesFailingAssertion = [];
         foreach ($this->variables as $variableName) {
             $variableValue = $this->loader->getEnvironmentVariable($variableName);
             if (call_user_func($callback, $variableValue) === false) {
