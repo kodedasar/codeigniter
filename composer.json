@@ -1,29 +1,19 @@
 {
-	"description": "The CodeIgniter framework",
+	"description": "CodeIgniter 3",
 	"name": "codeigniter/framework",
 	"type": "project",
-	"homepage": "https://codeigniter.com",
+	"homepage": "https://github.com/damasdev/codeigniter",
 	"license": "MIT",
-	"support": {
-		"forum": "http://forum.codeigniter.com/",
-		"wiki": "https://github.com/bcit-ci/CodeIgniter/wiki",
-		"slack": "https://codeigniterchat.slack.com",
-		"source": "https://github.com/bcit-ci/CodeIgniter"
-	},
 	"require": {
-		"php": ">=5.3.7"
-	},
-	"suggest": {
-		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+		"php": ">=7.4"
 	},
 	"scripts": {
 		"test": [
-			"@putenv XDEBUG_MODE=coverage",
 			"vendor/bin/phpunit -c application/tests/"
 		]
 	},
 	"require-dev": {
-		"phpunit/phpunit": "4.* || 5.* || 9.*",
+		"phpunit/phpunit": "9.*",
 		"kenjis/ci-phpunit-test": "^3.0"
 	}
 }
