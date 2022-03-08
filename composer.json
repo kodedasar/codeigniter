@@ -5,7 +5,8 @@
 	"homepage": "https://github.com/damasdev/codeigniter",
 	"license": "MIT",
 	"require": {
-		"php": ">=7.4"
+		"php": ">=7.4",
+		"kenjis/codeigniter-ss-twig": "^1.0"
 	},
 	"scripts": {
 		"test": [
