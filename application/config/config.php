@@ -139,7 +139,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FCPATH . 'vendor/autoload.php';
+$config['composer_autoload'] = FCPATH.'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -388,7 +388,7 @@ $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = APPPATH . '/cache/sessions';
+$config['sess_save_path'] = APPPATH.'/cache/sessions';
 $config['sess_match_ip'] = false;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = false;
