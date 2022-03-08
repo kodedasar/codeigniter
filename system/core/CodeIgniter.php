@@ -63,12 +63,12 @@ const CI_VERSION = '3.1.13';
  *  Load the framework constants
  * ------------------------------------------------------
  */
-if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/constants.php')) {
-    require_once APPPATH . 'config/' . getenv('CI_ENV') . '/constants.php';
+if (file_exists(APPPATH.'config/'.getenv('CI_ENV').'/constants.php')) {
+    require_once APPPATH.'config/'.getenv('CI_ENV').'/constants.php';
 }
 
-if (file_exists(APPPATH . 'config/constants.php')) {
-    require_once APPPATH . 'config/constants.php';
+if (file_exists(APPPATH.'config/constants.php')) {
+    require_once APPPATH.'config/constants.php';
 }
 
 /*
@@ -76,7 +76,7 @@ if (file_exists(APPPATH . 'config/constants.php')) {
  *  Load the global functions
  * ------------------------------------------------------
  */
-require_once BASEPATH . 'core/Common.php';
+require_once BASEPATH.'core/Common.php';
 
 /*
  * ------------------------------------------------------
@@ -157,13 +157,13 @@ if (!empty($assign_to_config['subclass_prefix'])) {
  */
 if ($composer_autoload = config_item('composer_autoload')) {
     if ($composer_autoload === true) {
-        file_exists(APPPATH . 'vendor/autoload.php')
-            ? require_once(APPPATH . 'vendor/autoload.php')
-            : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but ' . APPPATH . 'vendor/autoload.php was not found.');
+        file_exists(APPPATH.'vendor/autoload.php')
+            ? require_once(APPPATH.'vendor/autoload.php')
+            : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APPPATH.'vendor/autoload.php was not found.');
     } elseif (file_exists($composer_autoload)) {
         require_once $composer_autoload;
     } else {
-        log_message('error', 'Could not find the specified $config[\'composer_autoload\'] path: ' . $composer_autoload);
+        log_message('error', 'Could not find the specified $config[\'composer_autoload\'] path: '.$composer_autoload);
     }
 }
 
@@ -259,10 +259,10 @@ if (is_php('5.6')) {
  * ------------------------------------------------------
  */
 
-require_once BASEPATH . 'core/compat/mbstring.php';
-require_once BASEPATH . 'core/compat/hash.php';
-require_once BASEPATH . 'core/compat/password.php';
-require_once BASEPATH . 'core/compat/standard.php';
+require_once BASEPATH.'core/compat/mbstring.php';
+require_once BASEPATH.'core/compat/hash.php';
+require_once BASEPATH.'core/compat/password.php';
+require_once BASEPATH.'core/compat/standard.php';
 
 /*
  * ------------------------------------------------------
@@ -329,7 +329,7 @@ $LANG = &load_class('Lang', 'core');
  *
  */
 // Load the base controller class
-require_once BASEPATH . 'core/Controller.php';
+require_once BASEPATH.'core/Controller.php';
 
 /**
  * Reference to the CI_Controller method.
@@ -343,8 +343,8 @@ function &get_instance()
     return CI_Controller::get_instance();
 }
 
-if (file_exists(APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controller.php')) {
-    require_once APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controller.php';
+if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php')) {
+    require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
 }
 
 // Set a mark point for benchmarking
@@ -375,10 +375,10 @@ $e404 = false;
 $class = ucfirst($RTR->class);
 $method = $RTR->method;
 
-if (empty($class) or !file_exists(APPPATH . 'controllers/' . $RTR->directory . $class . '.php')) {
+if (empty($class) or !file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php')) {
     $e404 = true;
 } else {
-    require_once APPPATH . 'controllers/' . $RTR->directory . $class . '.php';
+    require_once APPPATH.'controllers/'.$RTR->directory.$class.'.php';
 
     if (!class_exists($class, false) or $method[0] === '_' or method_exists('CI_Controller', $method)) {
         $e404 = true;
@@ -416,13 +416,13 @@ if ($e404) {
         $error_class = ucfirst($error_class);
 
         if (!class_exists($error_class, false)) {
-            if (file_exists(APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php')) {
-                require_once APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php';
+            if (file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php')) {
+                require_once APPPATH.'controllers/'.$RTR->directory.$error_class.'.php';
                 $e404 = !class_exists($error_class, false);
             }
             // Were we in a directory? If so, check for a global override
-            elseif (!empty($RTR->directory) && file_exists(APPPATH . 'controllers/' . $error_class . '.php')) {
-                require_once APPPATH . 'controllers/' . $error_class . '.php';
+            elseif (!empty($RTR->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php')) {
+                require_once APPPATH.'controllers/'.$error_class.'.php';
                 if (($e404 = !class_exists($error_class, false)) === false) {
                     $RTR->directory = '';
                 }
@@ -442,7 +442,7 @@ if ($e404) {
             2 => $method,
         ];
     } else {
-        show_404($RTR->directory . $class . '/' . $method);
+        show_404($RTR->directory.$class.'/'.$method);
     }
 }
 
@@ -463,7 +463,7 @@ $EXT->call_hook('pre_controller');
  * ------------------------------------------------------
  */
 // Mark a start point so we can benchmark the controller
-$BM->mark('controller_execution_time_( ' . $class . ' / ' . $method . ' )_start');
+$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_start');
 
 $CI = new $class();
 
@@ -482,7 +482,7 @@ $EXT->call_hook('post_controller_constructor');
 call_user_func_array([&$CI, $method], $params);
 
 // Mark a benchmark end point
-$BM->mark('controller_execution_time_( ' . $class . ' / ' . $method . ' )_end');
+$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_end');
 
 /*
  * ------------------------------------------------------
