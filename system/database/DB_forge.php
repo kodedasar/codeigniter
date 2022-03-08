@@ -505,10 +505,10 @@ abstract class CI_DB_forge
 
         $result = $this->db->query(
             sprintf(
-            $this->_rename_table,
-            $this->db->escape_identifiers($this->db->dbprefix.$table_name),
-            $this->db->escape_identifiers($this->db->dbprefix.$new_table_name)
-        )
+                $this->_rename_table,
+                $this->db->escape_identifiers($this->db->dbprefix.$table_name),
+                $this->db->escape_identifiers($this->db->dbprefix.$new_table_name)
+            )
         );
 
         if ($result && !empty($this->db->data_cache['table_names'])) {
