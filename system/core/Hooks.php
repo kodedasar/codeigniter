@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter.
  *
@@ -98,12 +99,12 @@ class CI_Hooks
         }
 
         // Grab the "hooks" definition file.
-        if (file_exists(APPPATH.'config/hooks.php')) {
-            include APPPATH.'config/hooks.php';
+        if (file_exists(APPPATH . 'config/hooks.php')) {
+            include APPPATH . 'config/hooks.php';
         }
 
-        if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/hooks.php')) {
-            include APPPATH.'config/'.ENVIRONMENT.'/hooks.php';
+        if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/hooks.php')) {
+            include APPPATH . 'config/' . getenv('CI_ENV') . '/hooks.php';
         }
 
         // If there are no hooks, we're done.
@@ -187,7 +188,7 @@ class CI_Hooks
             return false;
         }
 
-        $filepath = APPPATH.$data['filepath'].'/'.$data['filename'];
+        $filepath = APPPATH . $data['filepath'] . '/' . $data['filename'];
 
         if (!file_exists($filepath)) {
             return false;

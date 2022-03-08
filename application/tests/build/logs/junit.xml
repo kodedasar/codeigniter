@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.029668">
-    <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.029668">
-      <testsuite name="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.029668">
-        <testcase name="test_index" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="14" assertions="1" time="0.009756"/>
-        <testcase name="test_method_404" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="20" assertions="1" time="0.008154"/>
-        <testcase name="test_APPPATH" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="26" assertions="1" time="0.011759"/>
+  <testsuite name="" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.014024">
+    <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.014024">
+      <testsuite name="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.014024">
+        <testcase name="test_index" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="14" assertions="1" time="0.008885"/>
+        <testcase name="test_method_404" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="20" assertions="1" time="0.002716"/>
+        <testcase name="test_APPPATH" class="Welcome_test" classname="Welcome_test" file="/Users/damasdev/Sites/codeigniter/application/tests/controllers/Welcome_test.php" line="26" assertions="1" time="0.002423"/>
       </testsuite>
     </testsuite>
   </testsuite>

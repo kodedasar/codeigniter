@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter.
  *
@@ -193,12 +194,12 @@ class CI_User_agent
      */
     protected function _load_agent_file()
     {
-        if (($found = file_exists(APPPATH.'config/user_agents.php'))) {
-            include APPPATH.'config/user_agents.php';
+        if (($found = file_exists(APPPATH . 'config/user_agents.php'))) {
+            include APPPATH . 'config/user_agents.php';
         }
 
-        if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/user_agents.php')) {
-            include APPPATH.'config/'.ENVIRONMENT.'/user_agents.php';
+        if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/user_agents.php')) {
+            include APPPATH . 'config/' . getenv('CI_ENV') . '/user_agents.php';
             $found = true;
         }
 
@@ -264,7 +265,7 @@ class CI_User_agent
     {
         if (is_array($this->platforms) && count($this->platforms) > 0) {
             foreach ($this->platforms as $key => $val) {
-                if (preg_match('|'.preg_quote($key).'|i', $this->agent)) {
+                if (preg_match('|' . preg_quote($key) . '|i', $this->agent)) {
                     $this->platform = $val;
 
                     return true;
@@ -288,7 +289,7 @@ class CI_User_agent
     {
         if (is_array($this->browsers) && count($this->browsers) > 0) {
             foreach ($this->browsers as $key => $val) {
-                if (preg_match('|'.$key.'.*?([0-9\.]+)|i', $this->agent, $match)) {
+                if (preg_match('|' . $key . '.*?([0-9\.]+)|i', $this->agent, $match)) {
                     $this->is_browser = true;
                     $this->version = $match[1];
                     $this->browser = $val;
@@ -313,7 +314,7 @@ class CI_User_agent
     {
         if (is_array($this->robots) && count($this->robots) > 0) {
             foreach ($this->robots as $key => $val) {
-                if (preg_match('|'.preg_quote($key).'|i', $this->agent)) {
+                if (preg_match('|' . preg_quote($key) . '|i', $this->agent)) {
                     $this->is_robot = true;
                     $this->robot = $val;
                     $this->_set_mobile();

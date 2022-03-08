@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter.
  *
@@ -68,13 +69,13 @@ if (!function_exists('word_limiter')) {
             return $str;
         }
 
-        preg_match('/^\s*+(?:\S++\s*+){1,'.(int) $limit.'}/', $str, $matches);
+        preg_match('/^\s*+(?:\S++\s*+){1,' . (int) $limit . '}/', $str, $matches);
 
         if (strlen($str) === strlen($matches[0])) {
             $end_char = '';
         }
 
-        return rtrim($matches[0]).$end_char;
+        return rtrim($matches[0]) . $end_char;
     }
 }
 
@@ -108,12 +109,12 @@ if (!function_exists('character_limiter')) {
 
         $out = '';
         foreach (explode(' ', trim($str)) as $val) {
-            $out .= $val.' ';
+            $out .= $val . ' ';
 
             if (mb_strlen($out) >= $n) {
                 $out = trim($out);
 
-                return (mb_strlen($out) === mb_strlen($str)) ? $out : $out.$end_char;
+                return (mb_strlen($out) === mb_strlen($str)) ? $out : $out . $end_char;
             }
         }
     }
@@ -146,7 +147,7 @@ if (!function_exists('ascii_to_entities')) {
                     fair that we output that entity and restart $temp before continuing. -Paul
                 */
                 if (count($temp) === 1) {
-                    $out .= '&#'.array_shift($temp).';';
+                    $out .= '&#' . array_shift($temp) . ';';
                     $count = 1;
                 }
 
@@ -163,13 +164,13 @@ if (!function_exists('ascii_to_entities')) {
                         ? (($temp[0] % 16) * 4096) + (($temp[1] % 64) * 64) + ($temp[2] % 64)
                         : (($temp[0] % 32) * 64) + ($temp[1] % 64);
 
-                    $out .= '&#'.$number.';';
+                    $out .= '&#' . $number . ';';
                     $count = 1;
                     $temp = [];
                 }
                 // If this is the last iteration, just output whatever we have
                 elseif ($i === $length) {
-                    $out .= '&#'.implode(';', $temp).';';
+                    $out .= '&#' . implode(';', $temp) . ';';
                 }
             }
         }
@@ -201,11 +202,11 @@ if (!function_exists('entities_to_ascii')) {
                 if ($digits < 128) {
                     $out .= chr($digits);
                 } elseif ($digits < 2048) {
-                    $out .= chr(192 + (($digits - ($digits % 64)) / 64)).chr(128 + ($digits % 64));
+                    $out .= chr(192 + (($digits - ($digits % 64)) / 64)) . chr(128 + ($digits % 64));
                 } else {
                     $out .= chr(224 + (($digits - ($digits % 4096)) / 4096))
-                        .chr(128 + ((($digits % 4096) - ($digits % 64)) / 64))
-                        .chr(128 + ($digits % 64));
+                        . chr(128 + ((($digits % 4096) - ($digits % 64)) / 64))
+                        . chr(128 + ($digits % 64));
                 }
 
                 $str = str_replace($matches[0][$i], $out, $str);
@@ -246,7 +247,7 @@ if (!function_exists('word_censor')) {
             return $str;
         }
 
-        $str = ' '.$str.' ';
+        $str = ' ' . $str . ' ';
 
         // \w, \b and a few others do not match on a unicode character
         // set for performance reasons. As a result words like über
@@ -258,11 +259,11 @@ if (!function_exists('word_censor')) {
             $badword = str_replace('\*', '\w*?', preg_quote($badword, '/'));
             if ($replacement !== '') {
                 $str = preg_replace(
-                    "/({$delim})(".$badword.")({$delim})/i",
+                    "/({$delim})(" . $badword . ")({$delim})/i",
                     "\\1{$replacement}\\3",
                     $str
                 );
-            } elseif (preg_match_all("/{$delim}(".$badword."){$delim}/i", $str, $matches, PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE)) {
+            } elseif (preg_match_all("/{$delim}(" . $badword . "){$delim}/i", $str, $matches, PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE)) {
                 $matches = $matches[1];
                 for ($i = count($matches) - 1; $i >= 0; $i--) {
                     $length = strlen($matches[$i][0]);
@@ -309,7 +310,7 @@ if (!function_exists('highlight_code')) {
 
         // The highlight_string function requires that the text be surrounded
         // by PHP tags, which we will remove later
-        $str = highlight_string('<?php '.$str.' ?>', true);
+        $str = highlight_string('<?php ' . $str . ' ?>', true);
 
         // Remove our artificially added PHP, and the syntax highlighting that came with it
         $str = preg_replace(
@@ -353,7 +354,7 @@ if (!function_exists('highlight_phrase')) {
     function highlight_phrase($str, $phrase, $tag_open = '<mark>', $tag_close = '</mark>')
     {
         return ($str !== '' && $phrase !== '')
-            ? preg_replace('/('.preg_quote($phrase, '/').')/i'.(UTF8_ENABLED ? 'u' : ''), $tag_open.'\\1'.$tag_close, $str)
+            ? preg_replace('/(' . preg_quote($phrase, '/') . ')/i' . (UTF8_ENABLED ? 'u' : ''), $tag_open . '\\1' . $tag_close, $str)
             : $str;
     }
 }
@@ -373,12 +374,12 @@ if (!function_exists('convert_accented_characters')) {
         static $array_from, $array_to;
 
         if (!is_array($array_from)) {
-            if (file_exists(APPPATH.'config/foreign_chars.php')) {
-                include APPPATH.'config/foreign_chars.php';
+            if (file_exists(APPPATH . 'config/foreign_chars.php')) {
+                include APPPATH . 'config/foreign_chars.php';
             }
 
-            if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php')) {
-                include APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php';
+            if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/foreign_chars.php')) {
+                include APPPATH . 'config/' . getenv('CI_ENV') . '/foreign_chars.php';
             }
 
             if (empty($foreign_characters) or !is_array($foreign_characters)) {
@@ -430,7 +431,7 @@ if (!function_exists('word_wrap')) {
         if (preg_match_all('|\{unwrap\}(.+?)\{/unwrap\}|s', $str, $matches)) {
             for ($i = 0, $c = count($matches[0]); $i < $c; $i++) {
                 $unwrap[] = $matches[1][$i];
-                $str = str_replace($matches[0][$i], '{{unwrapped'.$i.'}}', $str);
+                $str = str_replace($matches[0][$i], '{{unwrapped' . $i . '}}', $str);
             }
         }
 
@@ -445,7 +446,7 @@ if (!function_exists('word_wrap')) {
             // Is the line within the allowed character count?
             // If so we'll join it to the output and continue
             if (mb_strlen($line) <= $charlim) {
-                $output .= $line."\n";
+                $output .= $line . "\n";
                 continue;
             }
 
@@ -464,16 +465,16 @@ if (!function_exists('word_wrap')) {
             // If $temp contains data it means we had to split up an over-length
             // word into smaller chunks so we'll add it back to our current line
             if ($temp !== '') {
-                $output .= $temp."\n".$line."\n";
+                $output .= $temp . "\n" . $line . "\n";
             } else {
-                $output .= $line."\n";
+                $output .= $line . "\n";
             }
         }
 
         // Put our markers back
         if (count($unwrap) > 0) {
             foreach ($unwrap as $key => $val) {
-                $output = str_replace('{{unwrapped'.$key.'}}', $val, $output);
+                $output = str_replace('{{unwrapped' . $key . '}}', $val, $output);
             }
         }
 
@@ -510,11 +511,11 @@ if (!function_exists('ellipsize')) {
         $position = ($position > 1) ? 1 : $position;
 
         if ($position === 1) {
-            $end = mb_substr($str, 0, -($max_length - mb_strlen($beg)));
+            $end = mb_substr($str, 0, - ($max_length - mb_strlen($beg)));
         } else {
-            $end = mb_substr($str, -($max_length - mb_strlen($beg)));
+            $end = mb_substr($str, - ($max_length - mb_strlen($beg)));
         }
 
-        return $beg.$ellipsis.$end;
+        return $beg . $ellipsis . $end;
     }
 }

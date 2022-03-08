@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter.
  *
@@ -100,7 +101,7 @@ if (!function_exists('is_really_writable')) {
          * write a file then read it. Bah...
          */
         if (is_dir($file)) {
-            $file = rtrim($file, '/').'/'.md5(mt_rand());
+            $file = rtrim($file, '/') . '/' . md5(mt_rand());
             if (($fp = @fopen($file, 'ab')) === false) {
                 return false;
             }
@@ -150,11 +151,11 @@ if (!function_exists('load_class')) {
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
         foreach ([APPPATH, BASEPATH] as $path) {
-            if (file_exists($path.$directory.'/'.$class.'.php')) {
-                $name = 'CI_'.$class;
+            if (file_exists($path . $directory . '/' . $class . '.php')) {
+                $name = 'CI_' . $class;
 
                 if (class_exists($name, false) === false) {
-                    require_once $path.$directory.'/'.$class.'.php';
+                    require_once $path . $directory . '/' . $class . '.php';
                 }
 
                 break;
@@ -162,11 +163,11 @@ if (!function_exists('load_class')) {
         }
 
         // Is the request a class extension? If so we load it too
-        if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php')) {
-            $name = config_item('subclass_prefix').$class;
+        if (file_exists(APPPATH . $directory . '/' . config_item('subclass_prefix') . $class . '.php')) {
+            $name = config_item('subclass_prefix') . $class;
 
             if (class_exists($name, false) === false) {
-                require_once APPPATH.$directory.'/'.$name.'.php';
+                require_once APPPATH . $directory . '/' . $name . '.php';
             }
         }
 
@@ -175,7 +176,7 @@ if (!function_exists('load_class')) {
             // Note: We use exit() rather than show_error() in order to avoid a
             // self-referencing loop with the Exceptions class
             set_status_header(503);
-            echo 'Unable to locate the specified class: '.$class.'.php';
+            echo 'Unable to locate the specified class: ' . $class . '.php';
             exit(5); // EXIT_UNK_CLASS
         }
 
@@ -231,7 +232,7 @@ if (!function_exists('get_config')) {
         static $config;
 
         if (empty($config)) {
-            $file_path = APPPATH.'config/config.php';
+            $file_path = APPPATH . 'config/config.php';
             $found = false;
             if (file_exists($file_path)) {
                 $found = true;
@@ -239,7 +240,7 @@ if (!function_exists('get_config')) {
             }
 
             // Is the config file in the environment folder?
-            if (file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php')) {
+            if (file_exists($file_path = APPPATH . 'config/' . getenv('CI_ENV') . '/config.php')) {
                 require $file_path;
             } elseif (!$found) {
                 set_status_header(503);
@@ -300,12 +301,12 @@ if (!function_exists('get_mimes')) {
         static $_mimes;
 
         if (empty($_mimes)) {
-            $_mimes = file_exists(APPPATH.'config/mimes.php')
-                ? include(APPPATH.'config/mimes.php')
+            $_mimes = file_exists(APPPATH . 'config/mimes.php')
+                ? include(APPPATH . 'config/mimes.php')
                 : [];
 
-            if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php')) {
-                $_mimes = array_merge($_mimes, include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'));
+            if (file_exists(APPPATH . 'config/' . getenv('CI_ENV') . '/mimes.php')) {
+                $_mimes = array_merge($_mimes, include(APPPATH . 'config/' . getenv('CI_ENV') . '/mimes.php'));
             }
         }
 
@@ -463,56 +464,56 @@ if (!function_exists('set_status_header')) {
         if (empty($text)) {
             is_int($code) or $code = (int) $code;
             $stati = [
-                100	=> 'Continue',
-                101	=> 'Switching Protocols',
+                100    => 'Continue',
+                101    => 'Switching Protocols',
 
-                200	=> 'OK',
-                201	=> 'Created',
-                202	=> 'Accepted',
-                203	=> 'Non-Authoritative Information',
-                204	=> 'No Content',
-                205	=> 'Reset Content',
-                206	=> 'Partial Content',
+                200    => 'OK',
+                201    => 'Created',
+                202    => 'Accepted',
+                203    => 'Non-Authoritative Information',
+                204    => 'No Content',
+                205    => 'Reset Content',
+                206    => 'Partial Content',
 
-                300	=> 'Multiple Choices',
-                301	=> 'Moved Permanently',
-                302	=> 'Found',
-                303	=> 'See Other',
-                304	=> 'Not Modified',
-                305	=> 'Use Proxy',
-                307	=> 'Temporary Redirect',
+                300    => 'Multiple Choices',
+                301    => 'Moved Permanently',
+                302    => 'Found',
+                303    => 'See Other',
+                304    => 'Not Modified',
+                305    => 'Use Proxy',
+                307    => 'Temporary Redirect',
 
-                400	=> 'Bad Request',
-                401	=> 'Unauthorized',
-                402	=> 'Payment Required',
-                403	=> 'Forbidden',
-                404	=> 'Not Found',
-                405	=> 'Method Not Allowed',
-                406	=> 'Not Acceptable',
-                407	=> 'Proxy Authentication Required',
-                408	=> 'Request Timeout',
-                409	=> 'Conflict',
-                410	=> 'Gone',
-                411	=> 'Length Required',
-                412	=> 'Precondition Failed',
-                413	=> 'Request Entity Too Large',
-                414	=> 'Request-URI Too Long',
-                415	=> 'Unsupported Media Type',
-                416	=> 'Requested Range Not Satisfiable',
-                417	=> 'Expectation Failed',
-                422	=> 'Unprocessable Entity',
-                426	=> 'Upgrade Required',
-                428	=> 'Precondition Required',
-                429	=> 'Too Many Requests',
-                431	=> 'Request Header Fields Too Large',
+                400    => 'Bad Request',
+                401    => 'Unauthorized',
+                402    => 'Payment Required',
+                403    => 'Forbidden',
+                404    => 'Not Found',
+                405    => 'Method Not Allowed',
+                406    => 'Not Acceptable',
+                407    => 'Proxy Authentication Required',
+                408    => 'Request Timeout',
+                409    => 'Conflict',
+                410    => 'Gone',
+                411    => 'Length Required',
+                412    => 'Precondition Failed',
+                413    => 'Request Entity Too Large',
+                414    => 'Request-URI Too Long',
+                415    => 'Unsupported Media Type',
+                416    => 'Requested Range Not Satisfiable',
+                417    => 'Expectation Failed',
+                422    => 'Unprocessable Entity',
+                426    => 'Upgrade Required',
+                428    => 'Precondition Required',
+                429    => 'Too Many Requests',
+                431    => 'Request Header Fields Too Large',
 
-                500	=> 'Internal Server Error',
-                501	=> 'Not Implemented',
-                502	=> 'Bad Gateway',
-                503	=> 'Service Unavailable',
-                504	=> 'Gateway Timeout',
-                505	=> 'HTTP Version Not Supported',
-                511	=> 'Network Authentication Required',
+                500    => 'Internal Server Error',
+                501    => 'Not Implemented',
+                502    => 'Bad Gateway',
+                503    => 'Service Unavailable',
+                504    => 'Gateway Timeout',
+                505    => 'HTTP Version Not Supported',
+                511    => 'Network Authentication Required',
             ];
 
             if (isset($stati[$code])) {
@@ -523,14 +524,14 @@ if (!function_exists('set_status_header')) {
         }
 
         if (strpos(PHP_SAPI, 'cgi') === 0) {
-            header('Status: '.$code.' '.$text, true);
+            header('Status: ' . $code . ' ' . $text, true);
 
             return;
         }
 
         $server_protocol = (isset($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], ['HTTP/1.0', 'HTTP/1.1', 'HTTP/2', 'HTTP/2.0'], true))
             ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
-        header($server_protocol.' '.$code.' '.$text, true, $code);
+        header($server_protocol . ' ' . $code . ' ' . $text, true, $code);
     }
 }
 
@@ -609,7 +610,7 @@ if (!function_exists('_exception_handler')) {
     function _exception_handler($exception)
     {
         $_error = &load_class('Exceptions', 'core');
-        $_error->log_exception('error', 'Exception: '.$exception->getMessage(), $exception->getFile(), $exception->getLine());
+        $_error->log_exception('error', 'Exception: ' . $exception->getMessage(), $exception->getFile(), $exception->getLine());
 
         is_cli() or set_status_header(500);
         // Should we display the error?
@@ -641,8 +642,10 @@ if (!function_exists('_shutdown_handler')) {
     function _shutdown_handler()
     {
         $last_error = error_get_last();
-        if (isset($last_error) &&
-            ($last_error['type'] & (E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING))) {
+        if (
+            isset($last_error) &&
+            ($last_error['type'] & (E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING))
+        ) {
             _error_handler($last_error['type'], $last_error['message'], $last_error['file'], $last_error['line']);
         }
     }
@@ -669,12 +672,12 @@ if (!function_exists('remove_invisible_characters')) {
         // every control character except newline (dec 10),
         // carriage return (dec 13) and horizontal tab (dec 09)
         if ($url_encoded) {
-            $non_displayables[] = '/%0[0-8bcef]/i';	// url encoded 00-08, 11, 12, 14, 15
-            $non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31
-            $non_displayables[] = '/%7f/i';	// url encoded 127
+            $non_displayables[] = '/%0[0-8bcef]/i';    // url encoded 00-08, 11, 12, 14, 15
+            $non_displayables[] = '/%1[0-9a-f]/i';    // url encoded 16-31
+            $non_displayables[] = '/%7f/i';    // url encoded 127
         }
 
-        $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
+        $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';    // 00-08, 11, 12, 14-31, 127
 
         do {
             $str = preg_replace($non_displayables, '', $str, -1, $count);
@@ -734,14 +737,14 @@ if (!function_exists('_stringify_attributes')) {
         }
 
         if (is_string($attributes)) {
-            return ' '.$attributes;
+            return ' ' . $attributes;
         }
 
         $attributes = (array) $attributes;
 
         $atts = '';
         foreach ($attributes as $key => $val) {
-            $atts .= ($js) ? $key.'='.$val.',' : ' '.$key.'="'.$val.'"';
+            $atts .= ($js) ? $key . '=' . $val . ',' : ' ' . $key . '="' . $val . '"';
         }
 
         return rtrim($atts, ',');

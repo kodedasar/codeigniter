@@ -25,9 +25,6 @@ class Dotenv
 
     public function __construct($path, $file = '.env')
     {
-        if ($file == '.env') {
-            $file = '.env.'.strtolower(ENVIRONMENT);
-        }
         $this->filePath = $this->getFilePath($path, $file);
     }
 
@@ -69,7 +66,7 @@ class Dotenv
             $file = '.env';
         }
 
-        $filePath = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
+        $filePath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
 
         return $filePath;
     }
