@@ -75,7 +75,8 @@ class Loader
     {
         $filePath = $this->filePath;
         if (!is_readable($filePath) || !is_file($filePath)) {
-            echo "Related \".env\" not found, please configure \"". basename($filePath) ."\" it before running codeigniter application"; exit;
+            echo 'Related ".env" not found, please configure "'.basename($filePath).'" it before running codeigniter application';
+            exit;
             // throw new InvalidArgumentException(sprintf(
             //     'Dotenv: Environment file .env not found or not readable. '.
             //     'Create file with your environment settings at %s',
@@ -105,7 +106,7 @@ class Loader
         list($name, $value) = $this->sanitiseVariableValue($name, $value);
         $value = $this->resolveNestedVariables($value);
 
-        return array($name, $value);
+        return [$name, $value];
     }
 
     /**
@@ -124,7 +125,7 @@ class Loader
         list($name, $value) = $this->sanitiseVariableName($name, $value);
         list($name, $value) = $this->sanitiseVariableValue($name, $value);
 
-        return array($name, $value);
+        return [$name, $value];
     }
 
     /**
@@ -186,7 +187,7 @@ class Loader
             list($name, $value) = array_map('trim', explode('=', $name, 2));
         }
 
-        return array($name, $value);
+        return [$name, $value];
     }
 
     /**
@@ -203,7 +204,7 @@ class Loader
     {
         $value = trim($value);
         if (!$value) {
-            return array($name, $value);
+            return [$name, $value];
         }
 
         if ($this->beginsWithAQuote($value)) { // value starts with a quote
@@ -236,7 +237,7 @@ class Loader
             }
         }
 
-        return array($name, trim($value));
+        return [$name, trim($value)];
     }
 
     /**
@@ -280,9 +281,9 @@ class Loader
      */
     protected function sanitiseVariableName($name, $value)
     {
-        $name = trim(str_replace(array('export ', '\'', '"'), '', $name));
+        $name = trim(str_replace(['export ', '\'', '"'], '', $name));
 
-        return array($name, $value);
+        return [$name, $value];
     }
 
     /**
@@ -313,6 +314,7 @@ class Loader
                 return $_SERVER[$name];
             default:
                 $value = getenv($name);
+
                 return $value === false ? null : $value; // switch getenv default to null
         }
     }
