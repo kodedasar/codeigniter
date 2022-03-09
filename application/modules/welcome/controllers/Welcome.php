@@ -15,6 +15,6 @@ class Welcome extends MY_Controller
             'ci_version'  => CI_VERSION
         ];
 
-        echo $this->template()->addPath("welcome")->twig->display('@welcome/welcome', $data);
+        echo $this->addPath("welcome")->twig->display('@welcome/welcome', $data);
     }
 }
