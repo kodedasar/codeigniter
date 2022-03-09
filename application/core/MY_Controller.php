@@ -5,7 +5,7 @@ if (!defined('BASEPATH')) {
 }
 
 /* load the MX_Router class */
-require APPPATH . 'third_party/MX/Controller.php';
+require APPPATH.'third_party/MX/Controller.php';
 
 class MY_Controller extends MX_Controller
 {
@@ -25,7 +25,7 @@ class MY_Controller extends MX_Controller
 
     public function template($get = 'admin')
     {
-        $paths = ['paths' => [APPPATH . "views/$get", VIEWPATH]];
+        $paths = ['paths' => [APPPATH."views/$get", VIEWPATH]];
         $this->load->library('Twig', $paths);
         $this->twig->base = getenv('CI_URL');
 
@@ -39,7 +39,7 @@ class MY_Controller extends MX_Controller
     public function addPath($namespace = '', $customPath = '')
     {
         if (empty($customPath)) {
-            $paths = APPPATH . 'modules/' . get_class($this) . '/views/';
+            $paths = APPPATH.'modules/'.get_class($this).'/views/';
         } else {
             $paths = $customPath;
         }
