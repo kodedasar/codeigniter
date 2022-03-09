@@ -5,7 +5,7 @@ if (!defined('BASEPATH')) {
 }
 
 /* load the MX_Router class */
-require APPPATH . 'third_party/MX/Controller.php';
+require APPPATH.'third_party/MX/Controller.php';
 
 class MY_Controller extends MX_Controller
 {
@@ -17,7 +17,7 @@ class MY_Controller extends MX_Controller
 
     /**
      * HMVC : fix callback form_validation
-     * https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc
+     * https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc.
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class MY_Controller extends MX_Controller
     public function addPath($namespace = '', $customPath = '')
     {
         if (empty($customPath)) {
-            $paths = APPPATH . 'modules/' . get_class($this) . '/views/';
+            $paths = APPPATH.'modules/'.get_class($this).'/views/';
         } else {
             $paths = $customPath;
         }
