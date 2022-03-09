@@ -17,4 +17,9 @@ class Welcome extends MY_Controller
 
         echo $this->addPath("welcome")->twig->display('@welcome/welcome', $data);
     }
+
+    public function dashboard()
+    {
+        echo $this->addPath("welcome")->twig->display('@welcome/dashboard');
+    }
 }
