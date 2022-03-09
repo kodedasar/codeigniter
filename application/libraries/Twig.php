@@ -44,7 +44,7 @@ class Twig
      * @see http://twig.sensiolabs.org/doc/advanced.html#automatic-escaping
      */
     private $functions_safe = [
-        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value'
+        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value',
     ];
 
     /**
@@ -63,7 +63,7 @@ class Twig
     private $loader;
 
     /**
-     * CI
+     * CI.
      *
      * @var mixed
      */
@@ -97,7 +97,7 @@ class Twig
 
         // default Twig config
         $this->config = [
-            'cache'      => APPPATH . 'cache/twig',
+            'cache'      => APPPATH.'cache/twig',
             'debug'      => getenv('CI_ENV') !== 'production',
             'autoescape' => 'html',
         ];
@@ -173,7 +173,7 @@ class Twig
 
         $this->twig->addFilter($md5filter);
 
-        return $this->twig->render($view . '.twig', $params);
+        return $this->twig->render($view.'.twig', $params);
     }
 
     protected function addFunctions()
