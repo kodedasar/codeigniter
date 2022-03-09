@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends MX_Controller
+class Welcome extends MY_Controller
 {
     function __construct()
     {
@@ -11,8 +11,10 @@ class Welcome extends MX_Controller
 
     public function index()
     {
-        $this->twig->display('welcome', [
-            'version' => CI_VERSION,
-        ]);
+        $data = [
+            'ci_version'  => CI_VERSION
+        ];
+
+        echo $this->template()->addPath("welcome")->twig->display('@welcome/welcome', $data);
     }
 }

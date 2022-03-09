@@ -44,9 +44,7 @@ class Twig
      * @see http://twig.sensiolabs.org/doc/advanced.html#automatic-escaping
      */
     private $functions_safe = [
-        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value',
-        //		'form_open_multipart', 'form_upload', 'form_submit', 'form_dropdown',
-        //		'set_radio', 'set_select', 'set_checkbox',
+        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value'
     ];
 
     /**
@@ -64,20 +62,29 @@ class Twig
      */
     private $loader;
 
+    /**
+     * CI
+     *
+     * @var mixed
+     */
+    private $CI;
+
     public function __construct($params = [])
     {
+        // CI
+        $this->CI = &get_instance();
+
         if (isset($params['functions'])) {
-            $this->functions_asis =
-                array_unique(
-                    array_merge($this->functions_asis, $params['functions'])
-                );
+            $this->functions_asis = array_unique(
+                array_merge($this->functions_asis, $params['functions'])
+            );
             unset($params['functions']);
         }
+
         if (isset($params['functions_safe'])) {
-            $this->functions_safe =
-                array_unique(
-                    array_merge($this->functions_safe, $params['functions_safe'])
-                );
+            $this->functions_safe = array_unique(
+                array_merge($this->functions_safe, $params['functions_safe'])
+            );
             unset($params['functions_safe']);
         }
 
@@ -90,7 +97,7 @@ class Twig
 
         // default Twig config
         $this->config = [
-            'cache'      => APPPATH.'cache/twig',
+            'cache'      => APPPATH . 'cache/twig',
             'debug'      => getenv('CI_ENV') !== 'production',
             'autoescape' => 'html',
         ];
@@ -124,11 +131,6 @@ class Twig
         $this->twig = $twig;
     }
 
-    protected function setLoader($loader)
-    {
-        $this->loader = $loader;
-    }
-
     /**
      * Registers a Global.
      *
@@ -149,8 +151,7 @@ class Twig
      */
     public function display($view, $params = [])
     {
-        $CI = &get_instance();
-        $CI->output->set_output($this->render($view, $params));
+        $this->CI->output->set_output($this->render($view, $params));
     }
 
     /**
@@ -164,13 +165,15 @@ class Twig
     public function render($view, $params = [])
     {
         $this->createTwig();
-        // We call addFunctions() here, because we must call addFunctions()
-        // after loading CodeIgniter functions in a controller.
         $this->addFunctions();
 
-        $view = $view.'.twig';
+        $md5filter = new \Twig_SimpleFilter('md5', function ($str) {
+            return md5($str);
+        });
 
-        return $this->twig->render($view, $params);
+        $this->twig->addFilter($md5filter);
+
+        return $this->twig->render($view . '.twig', $params);
     }
 
     protected function addFunctions()
@@ -247,5 +250,29 @@ class Twig
         $this->createTwig();
 
         return $this->twig;
+    }
+
+    public function addPath($path = '', $namespace = '')
+    {
+        if ($this->loader === null) {
+            $this->loader = new \Twig_Loader_Filesystem($this->paths);
+        }
+
+        if (!empty($path)) {
+            if (empty($namespace)) {
+                $this->loader->prependPath($path);
+            } else {
+                $this->loader->prependPath($path, $namespace);
+            }
+        }
+
+        return $this;
+    }
+
+    protected function setLoader($loader)
+    {
+        $this->loader = $loader;
+
+        return $this;
     }
 }
