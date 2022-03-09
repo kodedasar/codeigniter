@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Welcome_test::test_index":0.009,"Welcome_test::test_method_404":0.003,"Welcome_test::test_APPPATH":0.002}}
+{"version":1,"defects":{"Welcome_test::test_index":4},"times":{"Welcome_test::test_index":0.035,"Welcome_test::test_method_404":0.005,"Welcome_test::test_APPPATH":0.001}}
