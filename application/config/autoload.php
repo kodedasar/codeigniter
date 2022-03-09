@@ -59,7 +59,7 @@ $autoload['packages'] = [];
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = ['twig', 'session'];
+$autoload['libraries'] = ['twig', 'session', 'database'];
 
 /*
 | -------------------------------------------------------------------
@@ -90,7 +90,7 @@ $autoload['drivers'] = [];
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = [];
+$autoload['helper'] = ['url'];
 
 /*
 | -------------------------------------------------------------------
