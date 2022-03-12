@@ -35,7 +35,7 @@ class Twig
      * @var array Functions to add to Twig
      */
     private $functions_asis = [
-        'base_url', 'site_url', 'lang', 'getenv', 'substr',
+        'base_url', 'site_url', 'lang', 'getenv', 'substr', 'sprintf'
     ];
 
     /**

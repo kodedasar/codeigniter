@@ -59,7 +59,7 @@ $autoload['packages'] = [];
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = ['twig', 'session', 'database'];
+$autoload['libraries'] = ['twig', 'session', 'database', 'ion_auth'];
 
 /*
 | -------------------------------------------------------------------

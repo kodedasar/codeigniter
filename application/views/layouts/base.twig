@@ -17,9 +17,10 @@
 	</head>
 
 	<body class="hold-transition login-page">
-		<div class="wrapper"> 
-            {% block content %}{% endblock %}
-			{{ include('layouts/partials/script.twig') }}
+		<div>
+			{% block content %}{% endblock %}
 		</div>
+
+		{{ include('layouts/partials/script.twig') }}
 	</body>
 </html>

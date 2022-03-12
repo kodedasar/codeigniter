@@ -2,11 +2,15 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends MY_Controller
+class Home extends MY_Controller
 {
     function __construct()
     {
         parent::__construct();
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
     }
 
     public function index()
@@ -15,6 +19,6 @@ class Welcome extends MY_Controller
             'ci_version'  => CI_VERSION
         ];
 
-        echo $this->addPath("welcome")->twig->display('@welcome/welcome', $data);
+        echo $this->addPath("home")->twig->display('@home/home', $data);
     }
 }

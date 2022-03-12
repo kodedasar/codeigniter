@@ -131,7 +131,7 @@ $config['identity'] = 'email';             /* You can use any unique column in y
                                                                 The values in this column, alongside password, will be used for login purposes
                                                                 IMPORTANT: If you are changing it from the default (email),
                                                                            update the UNIQUE constraint in your DB */
-$config['min_password_length'] = 8;                   // Minimum Required Length of Password (not enforced by lib - see note above)
+$config['min_password_length'] = 7;                   // Minimum Required Length of Password (not enforced by lib - see note above)
 $config['email_activation'] = false;               // Email Activation for registration
 $config['manual_activation'] = false;               // Manual Activation for registration
 $config['remember_users'] = true;                // Allow users to be remembered and enable auto-login
