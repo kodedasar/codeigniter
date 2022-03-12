@@ -3,7 +3,7 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ base_url }}/assets/img/avatar5.png" class="img-circle" alt="User Image">
+                <img src="{{ base_url('/assets/img/avatar5.png') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>NAMA PENGGUNA</p>
@@ -26,7 +26,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="{{ base_url }}">
+                <a href="{{ base_url() }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>

@@ -1,0 +1,61 @@
+{% extends "layouts/auth.twig" %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+	<div class="login-box">
+		<div class="login-logo">
+			<a href="{{ base_url() }}">
+				{{ getenv('CI_NAME') }}
+			</a>
+		</div>
+
+		<div class="login-box-body">
+			<p class="login-box-msg">Sign in to start your session</p>
+
+			{{ form_open('auth/login') }}
+
+			<div class="form-group has-feedback">
+				{{ form_input(identity) }}
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+
+			<div class="form-group has-feedback">
+				{{ form_input(password) }}
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+
+			<div class="text-danger">
+				{{ message|raw }}
+			</div>
+
+			<div class="row">
+				<div class="col-xs-8">
+					<div class="checkbox icheck">
+						<label>
+							<div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;margin-left:20px;">
+								{{ form_checkbox('remember', '1', false, 'id="remember"') }}
+							</div>
+							<span style="padding-left:20px">
+								Remember Me
+							</span>
+						</label>
+					</div>
+				</div>
+
+				<div class="col-xs-4">
+					{{ form_submit('submit', lang('login_submit_btn'), 'class="btn btn-primary btn-block btn-flat"') }}
+				</div>
+
+
+			</div>
+
+			{{ form_close() }}
+
+			<a href="forgot_password">{{ lang('login_forgot_password') }}</a>
+		</div>
+
+	</div>
+{% endblock %}

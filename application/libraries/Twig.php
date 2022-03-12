@@ -35,7 +35,7 @@ class Twig
      * @var array Functions to add to Twig
      */
     private $functions_asis = [
-        'base_url', 'site_url',
+        'base_url', 'site_url', 'lang', 'getenv', 'substr'
     ];
 
     /**
@@ -44,7 +44,7 @@ class Twig
      * @see http://twig.sensiolabs.org/doc/advanced.html#automatic-escaping
      */
     private $functions_safe = [
-        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value',
+        'form_open', 'form_close', 'form_error', 'form_hidden', 'set_value', 'form_submit', 'form_checkbox', 'form_input'
     ];
 
     /**

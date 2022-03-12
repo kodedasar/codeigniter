@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 
     {% block head %}
 
         {{ include('layouts/partials/style.twig') }}
 
-        <title>{% block title %}{% endblock %} - HMVC</title>
+        <title>{% block title %}{% endblock %} - {{ getenv('CI_NAME') }}</title>
 
     {% endblock %}
 

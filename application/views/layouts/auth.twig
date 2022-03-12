@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8"/>
+
+		{% block head %}
+
+			{{ include('layouts/partials/style.twig') }}
+
+			<title>
+				{% block title %}{% endblock %} - {{ getenv('CI_NAME') }}
+			</title>
+
+		{% endblock %}
+
+	</head>
+
+	<body class="hold-transition login-page">
+		<div class="wrapper"> 
+            {% block content %}{% endblock %}
+			{{ include('layouts/partials/script.twig') }}
+		</div>
+	</body>
+</html>

@@ -91,15 +91,20 @@ class Auth extends MY_Controller
                 'id'    => 'identity',
                 'type'  => 'text',
                 'value' => $this->form_validation->set_value('identity'),
+                'class' => 'form-control',
+                'placeholder' => 'Email'
             ];
 
             $this->data['password'] = [
                 'name' => 'password',
                 'id'   => 'password',
                 'type' => 'password',
+                'class' => 'form-control',
+                'placeholder' => 'Password'
             ];
 
-            $this->_render_page('auth'.DIRECTORY_SEPARATOR.'login', $this->data);
+            echo $this->twig->display('auth/login', $this->data);
+            // $this->_render_page('auth'.DIRECTORY_SEPARATOR.'login', $this->data);
         }
     }
 
