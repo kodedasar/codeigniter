@@ -87,20 +87,20 @@ class Auth extends MY_Controller
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
             $this->data['identity'] = [
-                'name'  => 'identity',
-                'id'    => 'identity',
-                'type'  => 'text',
-                'value' => $this->form_validation->set_value('identity'),
-                'class' => 'form-control',
-                'placeholder' => 'Email'
+                'name'        => 'identity',
+                'id'          => 'identity',
+                'type'        => 'text',
+                'value'       => $this->form_validation->set_value('identity'),
+                'class'       => 'form-control',
+                'placeholder' => 'Email',
             ];
 
             $this->data['password'] = [
-                'name' => 'password',
-                'id'   => 'password',
-                'type' => 'password',
-                'class' => 'form-control',
-                'placeholder' => 'Password'
+                'name'        => 'password',
+                'id'          => 'password',
+                'type'        => 'password',
+                'class'       => 'form-control',
+                'placeholder' => 'Password',
             ];
 
             echo $this->twig->display('auth/login', $this->data);
