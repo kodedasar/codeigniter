@@ -1,8 +1,8 @@
 <?php
 
  if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
+     exit('No direct script access allowed');
+ }
 /**
  * Name:  Ion Auth Lang - English.
  *
